@@ -1,24 +1,28 @@
-﻿namespace LoggingRecipe;
+﻿using LoggingRecipe.ViewModels;
+
+namespace LoggingRecipe;
 
 public partial class MainPage : ContentPage
 {
-    int count = 0;
+    private readonly MainPageViewModel viewModel;
 
-    public MainPage()
+    public MainPage(MainPageViewModel viewModel)
     {
         InitializeComponent();
+        this.viewModel = viewModel;
+        BindingContext = viewModel;
     }
 
-    private void OnCounterClicked(object sender, EventArgs e)
+    protected override void OnAppearing()
     {
-        count++;
+        base.OnAppearing();
+        viewModel.OnAppearing();
+    }
 
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
-
-        SemanticScreenReader.Announce(CounterBtn.Text);
+    protected override void OnDisappearing()
+    {
+        viewModel.OnDisappearing();
+        base.OnDisappearing();
     }
 }
 
