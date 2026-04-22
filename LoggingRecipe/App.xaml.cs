@@ -5,12 +5,18 @@ namespace LoggingRecipe;
 public partial class App : Application
 {
     private readonly ILogger<App> _logger;
+    private readonly AppShell appShell;
 
-    public App(ILogger<App> logger)
+    public App(ILogger<App> logger, AppShell appShell)
     {
         InitializeComponent();
-        MainPage = new AppShell();
         _logger = logger;
+        this.appShell = appShell;
+    }
+
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(appShell);
     }
 
     protected override void OnStart()
