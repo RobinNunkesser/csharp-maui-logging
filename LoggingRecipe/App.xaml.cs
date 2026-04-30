@@ -16,14 +16,14 @@ public partial class App : Application
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
+        _logger.LogDebug("Creating window at: {CreatedAt}", DateTimeOffset.Now);
         return new Window(appShell);
     }
 
     protected override void OnStart()
     {
         base.OnStart();
-        _logger.LogDebug($"Started at: {DateTimeOffset.Now}");
+        _logger.LogDebug("Started at: {StartedAt}", DateTimeOffset.Now);
     }
 
 }
-

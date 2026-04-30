@@ -17,7 +17,10 @@ public static class MauiProgram
             });
 
 #if DEBUG
-        builder.Logging.AddDebug();
+        builder.Logging
+            .AddDebug()
+            .SetMinimumLevel(LogLevel.Debug)
+            .AddFilter("LoggingRecipe", LogLevel.Debug);
 #endif
 
     builder.Services.AddSingleton<MainPageViewModel>();
@@ -27,4 +30,3 @@ public static class MauiProgram
         return builder.Build();
     }
 }
-
